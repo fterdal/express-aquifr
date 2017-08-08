@@ -1,6 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const router = require('./routes');
 
 const app = express();
@@ -16,6 +17,8 @@ app.engine('html', nunjucks.render);
 // Register ./public as the static folder
 app.use(express.static('./public'));
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use('/', router);
 
